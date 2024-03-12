@@ -41,7 +41,7 @@ public class wandiController : MonoBehaviour
     public Transform baseEsteiraOrigem;
     public float baseDestino;
     public float baseVelocidade;
-    public Vector3 basePosition = new Vector3(0, 0, 0);
+    public Vector3 basePosition = new Vector3(0.21f, 0.1021f, 67f);
     public float vectores;
 
 
@@ -226,25 +226,10 @@ public class wandiController : MonoBehaviour
                 //falta J6, mas é básico.
 
                 //Para base na esteira
-                StartCoroutine(inicarBaseEsteira());
+                baseEsteiraOrigem.localPosition = Vector3.Lerp(baseEsteiraOrigem.localPosition, basePosition, baseVelocidade);
                 vectores = basePosition.y - basePosition.z;
           }
           
-    }
-
-    public void inicarEsteira(){
-        StartCoroutine(inicarBaseEsteira());
-    }
-
-    IEnumerator inicarBaseEsteira(){
-        baseEsteiraOrigem.localPosition = Vector3.Lerp(baseEsteiraOrigem.localPosition, new Vector3(0.33f, 0.1021f, 1.08f), baseVelocidade);
-        yield return new WaitForSeconds(10f);
-        baseEsteiraOrigem.localPosition = Vector3.Lerp(baseEsteiraOrigem.localPosition, new Vector3(-0.96f, 0.1021f, -3.39f), baseVelocidade);
-        yield return new WaitForSeconds(15f);
-        baseEsteiraOrigem.localPosition = Vector3.Lerp(baseEsteiraOrigem.localPosition, new Vector3(-0.29f, 0.1021f, -1.05f), baseVelocidade);
-        yield return new WaitForSeconds(20f);
-        
-        yield return null;
     }
 
     //A cada clique no button vai incrementar ou decrementar no valor do destino da junta.

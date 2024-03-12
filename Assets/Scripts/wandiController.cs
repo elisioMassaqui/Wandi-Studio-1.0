@@ -9,6 +9,7 @@ using System.IO.Ports;
 public class wandiController : MonoBehaviour
 {
     public bool rotacionar;
+    public bool home;
 
     [Header("Juntas Steps/s")]
     public Transform origemJ1; //Pegar o vector escalar do objecto.
@@ -35,6 +36,13 @@ public class wandiController : MonoBehaviour
     public Transform origemJ6;
     public float destinoJ6;
     public float velocidadeJ6;
+
+    [Header("Base Na Esteira")]
+    public Transform baseEsteiraOrigem;
+    public float baseDestino;
+    public float baseVelocidade;
+    public Vector3 basePosition = new Vector3(0, 0, 0);
+    public float vectores;
 
 
     public SerialPort serialPort;
@@ -90,8 +98,6 @@ public class wandiController : MonoBehaviour
 
 
       public void OpenPorta(){
-         //A varaivel que vai dar a porta pra seriaPort está recebendo aqui o input do usuario no dropdown.
-        portaArduino = portNameFromArduino.text;
         try
         {
         //Recebe o nome da porta da variavel que vai receber do Input.
@@ -126,15 +132,8 @@ public class wandiController : MonoBehaviour
         progressConect.SetActive(true);
 
         yield return new WaitForSeconds(6f);
-        painelAutoControle.SetActive(false);
-        painelControleButtons.SetActive(!true);
-        painelControleSlider.SetActive(!true);
-
-        remotePainel.SetActive(!true);
+        
         remoteImage.color = Color.blue;
-
-        sliderMode.interactable = !true;
-        buttonMode.interactable = true;
 
         if (serialPort.IsOpen)
         {
@@ -149,16 +148,18 @@ public class wandiController : MonoBehaviour
             Debug.Log("X");
 
             // Sincronizar a posiçao com WR
+            /*
             RotationJ2Z = 10f;
             RotationJ3Z = 278f;
             RotationJ4Z = -48f;
+            */
 
             // Apos conecetar a porta vai sincronizar a posiçao com WR e os dados irao pra UI
-            SincronizadaJ1UI.text = "Posição J1.Y: " + RotationJ1Y.ToString("F1");
-            SincronizadaJ2UI.text = "Posição J2.Z: " + RotationJ2Z.ToString("F1");
-            SincronizadaJ3UI.text = "Posição J3.Z: " + RotationJ3Z.ToString("F1");
-            SincronizadaJ4UI.text = "Posição J4.Y: " + RotationJ4Y.ToString("F1");
-            SincronizadaJ5UI.text = "Posição J5.Y: " + RotationJ5Y.ToString("F1");
+            SincronizadaJ1UI.text = "Posição J1.Y: " + origemJ1.localRotation.ToString("F1");
+            SincronizadaJ2UI.text = "Posição J2.Z: " + origemJ2.localRotation.ToString("F1");
+            SincronizadaJ3UI.text = "Posição J3.Z: " + origemJ3.localRotation.ToString("F1");
+            SincronizadaJ4UI.text = "Posição J4.Y: " + origemJ4.localRotation.ToString("F1");
+            SincronizadaJ5UI.text = "Posição J5.Y: " + origemJ5.localRotation.ToString("F1");
         }
     }
 
@@ -167,25 +168,26 @@ public class wandiController : MonoBehaviour
     void Update()
     {
         //Limitar o valor da velocidade entre 0....e....1.
-          Mathf.Clamp01(velocidadeJ1);
-          Mathf.Clamp01(velocidadeJ2);
-          Mathf.Clamp01(velocidadeJ3);
-          Mathf.Clamp01(velocidadeJ4);
-          Mathf.Clamp01(velocidadeJ5);
-          Mathf.Clamp01(velocidadeJ6);
+          velocidadeJ1 = Mathf.Clamp(velocidadeJ1, 0.000f, 0.09f);
+          velocidadeJ2 = Mathf.Clamp(velocidadeJ2, 0.000f, 0.09f);
+          velocidadeJ3 = Mathf.Clamp(velocidadeJ3, 0.000f, 0.09f);
+          velocidadeJ4 = Mathf.Clamp(velocidadeJ4, 0.000f, 0.09f);
+          velocidadeJ5 = Mathf.Clamp(velocidadeJ5, 0.000f, 0.09f);
+          baseVelocidade = Mathf.Clamp(baseVelocidade, 0.000f, 0.09f);
+
 
          //o texto do angulo J da UI vai receber a string concatenada com o progresso do seu angulo.
-        anguloJ1.text = "Angulo J1.Y: " + RotationJ1Y.ToString("F2");
-        anguloJ2.text = "Angulo J2.Z: " + RotationJ2Z.ToString("F2");
-        anguloJ3.text = "Angulo J3.Z: " + RotationJ3Z.ToString("F2");
-        anguloJ4.text = "Angulo J4.Y: " + RotationJ4Y.ToString("F2");
-        anguloJ5.text = "Angulo J5.Y: " + RotationJ5Z.ToString("F2");
+        anguloJ1.text = "Angulo J1.Y: " + origemJ1.localRotation.y.ToString("F2");
+        anguloJ2.text = "Angulo J2.Z: " + origemJ2.localRotation.z.ToString("F2");
+        anguloJ3.text = "Angulo J3.Z: " + origemJ3.localRotation.z.ToString("F2");
+        anguloJ4.text = "Angulo J4.Y: " + origemJ4.localRotation.y.ToString("F2");
+        anguloJ5.text = "Angulo J5.Y: " + origemJ5.localRotation.y.ToString("F2");
 
-        unitJ1.text = RotationJ1Y.ToString("F2");
-        unitJ2.text = RotationJ2Z.ToString("F2");
-        unitJ3.text = RotationJ3Z.ToString("F2");
-        unitJ4.text = RotationJ4Y.ToString("F2");
-        unitJ5.text = RotationJ5Z.ToString("F2");
+        unitJ1.text = destinoJ1.ToString();
+        unitJ2.text = destinoJ2.ToString();
+        unitJ3.text = destinoJ3.ToString();
+        unitJ4.text = destinoJ4.ToString();
+        unitJ5.text = destinoJ5.ToString();
 
         //Se a porta estiver aberta ou não, muda de cor.
         if(serialPort.IsOpen){
@@ -212,7 +214,31 @@ public class wandiController : MonoBehaviour
                 origemJ5.localRotation = Quaternion.Slerp(origemJ5.localRotation, Quaternion.Euler(0, destinoJ5, 0), velocidadeJ5);
                 //falta J6, mas é básico.
           }
+
+          if(home){
+                   //Juntas Steps/s
+                origemJ1.localRotation = Quaternion.Slerp(origemJ1.localRotation, Quaternion.Euler(0, 180, 0), velocidadeJ1);
+                origemJ2.localRotation = Quaternion.Slerp(origemJ2.localRotation, Quaternion.Euler(0, 0, -20), velocidadeJ2);
+                //Juntas Graus/s
+                origemJ3.localRotation = Quaternion.Slerp(origemJ3.localRotation, Quaternion.Euler(0, 0, -88), velocidadeJ3);
+                origemJ4.localRotation = Quaternion.Slerp(origemJ4.localRotation, Quaternion.Euler(0, -2, 0), velocidadeJ4);
+                origemJ5.localRotation = Quaternion.Slerp(origemJ5.localRotation, Quaternion.Euler(0, 2, 0), velocidadeJ5);
+                //falta J6, mas é básico.
+
+                //Para base na esteira
+                StartCoroutine(inicarBaseEsteira());
+                vectores = basePosition.y - basePosition.z;
+          }
           
+    }
+
+    IEnumerator inicarBaseEsteira(){
+        baseEsteiraOrigem.localPosition = Vector3.Lerp(baseEsteiraOrigem.localPosition, new Vector3(0.33f, 0.1021f, 1.08f), baseVelocidade);
+        yield return new WaitForSeconds(10f);
+        baseEsteiraOrigem.localPosition = Vector3.Lerp(baseEsteiraOrigem.localPosition, new Vector3(-0.96f, 0.1021f, -3.39f), baseVelocidade);
+        yield return new WaitForSeconds(15f);
+        baseEsteiraOrigem.localPosition = Vector3.Lerp(baseEsteiraOrigem.localPosition, new Vector3(-0.29f, 0.1021f, -1.05f), baseVelocidade);
+        yield return null;
     }
 
     //A cada clique no button vai incrementar ou decrementar no valor do destino da junta.

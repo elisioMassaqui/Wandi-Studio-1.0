@@ -37,8 +37,6 @@ public class SimpleCameraSwitcher : MonoBehaviour
         // Ativa a câmera correspondente ao índice newIndex
         cameras[newIndex].enabled = true;
 
-        // Imprime uma mensagem no console
-        Debug.Log("Camera.Atual : " + cameras[newIndex].name);
         camerasTextUI.text = "Camera.Atual : " + cameras[newIndex].name;
     }
 }

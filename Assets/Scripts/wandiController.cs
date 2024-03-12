@@ -232,12 +232,18 @@ public class wandiController : MonoBehaviour
           
     }
 
+    public void inicarEsteira(){
+        StartCoroutine(inicarBaseEsteira());
+    }
+
     IEnumerator inicarBaseEsteira(){
         baseEsteiraOrigem.localPosition = Vector3.Lerp(baseEsteiraOrigem.localPosition, new Vector3(0.33f, 0.1021f, 1.08f), baseVelocidade);
         yield return new WaitForSeconds(10f);
         baseEsteiraOrigem.localPosition = Vector3.Lerp(baseEsteiraOrigem.localPosition, new Vector3(-0.96f, 0.1021f, -3.39f), baseVelocidade);
         yield return new WaitForSeconds(15f);
         baseEsteiraOrigem.localPosition = Vector3.Lerp(baseEsteiraOrigem.localPosition, new Vector3(-0.29f, 0.1021f, -1.05f), baseVelocidade);
+        yield return new WaitForSeconds(20f);
+        
         yield return null;
     }
 

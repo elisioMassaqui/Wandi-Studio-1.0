@@ -3115,10 +3115,10 @@ RectTransform:
   - {fileID: 613216227}
   m_Father: {fileID: 886083041}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 195.04, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 195.04, y: -27.5}
+  m_SizeDelta: {x: 0, y: 55}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &697194327
 MonoBehaviour:
@@ -4976,6 +4976,7 @@ GameObject:
   - component: {fileID: 886083044}
   - component: {fileID: 886083043}
   - component: {fileID: 886083042}
+  - component: {fileID: 886083045}
   m_Layer: 5
   m_Name: Partida Do Processo (Start)
   m_TagString: Untagged
@@ -5132,6 +5133,19 @@ MonoBehaviour:
   centered: 0
   isPreset: 1
   latestTabIndex: 0
+--- !u!114 &886083045
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 886083040}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates: []
 --- !u!1 &894911523
 GameObject:
   m_ObjectHideFlags: 0
@@ -14333,8 +14347,8 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 91627210}
-  - {fileID: 2065019906}
   - {fileID: 886083041}
+  - {fileID: 2065019906}
   m_Father: {fileID: 1865375572}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
@@ -16117,11 +16131,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2521728849883184636, guid: 35ed6e0721a506349bf8b5f73a4963a7, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.33
+      value: -0.87
       objectReference: {fileID: 0}
     - target: {fileID: 2521728849883184636, guid: 35ed6e0721a506349bf8b5f73a4963a7, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 1.08
+      value: -3.07
       objectReference: {fileID: 0}
     - target: {fileID: 2948996722022324049, guid: 35ed6e0721a506349bf8b5f73a4963a7, type: 3}
       propertyPath: m_LocalRotation.w

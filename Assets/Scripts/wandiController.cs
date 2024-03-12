@@ -65,6 +65,13 @@ public class wandiController : MonoBehaviour
     public TextMeshProUGUI SincronizadaJ3UI;
     public TextMeshProUGUI SincronizadaJ4UI;
     public TextMeshProUGUI SincronizadaJ5UI;
+
+    [Header("Valor Unitário das Juntas Na UI")]
+    public TextMeshProUGUI unitJ1;  //Mostrar, o valor a ser ++ ou -- dos botoes
+    public TextMeshProUGUI unitJ2;
+    public TextMeshProUGUI unitJ3;
+    public TextMeshProUGUI unitJ4;
+    public TextMeshProUGUI unitJ5;
     
 
 
@@ -172,6 +179,12 @@ public class wandiController : MonoBehaviour
         anguloJ3.text = "Angulo J3.Z: " + RotationJ3Z.ToString("F2");
         anguloJ4.text = "Angulo J4.Y: " + RotationJ4Y.ToString("F2");
         anguloJ5.text = "Angulo J5.Y: " + RotationJ5Z.ToString("F2");
+
+        unitJ1.text = RotationJ1Y.ToString("F2");
+        unitJ2.text = RotationJ2Z.ToString("F2");
+        unitJ3.text = RotationJ3Z.ToString("F2");
+        unitJ4.text = RotationJ4Y.ToString("F2");
+        unitJ5.text = RotationJ5Z.ToString("F2");
 
         //Se a porta estiver aberta ou não, muda de cor.
         if(serialPort.IsOpen){

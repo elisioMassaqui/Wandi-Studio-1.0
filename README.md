@@ -1,4 +1,4 @@
-# Wandi-Studio-1.3
+# Wandi-Studio-1.0
 
 # Simulador de Braço Robótico da Causa Efeito
 

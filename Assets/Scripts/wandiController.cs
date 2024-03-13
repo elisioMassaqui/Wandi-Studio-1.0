@@ -325,34 +325,34 @@ public class wandiController : MonoBehaviour
 
     //Velocidade do slider pode se incrementar e decrementar aqui e pra cada funçºao pode enviar algum char no Wandi Robot pra mudar a velocidade lá também, ao mesmo tempooo
     public void velocidadeJ1Min(){
-        sliderVelocidadeJ1.value -= 0.02f;
+        sliderVelocidadeJ1.value -= 0.01f;
     }
     public void VelocidadeJ1Max(){
-        sliderVelocidadeJ1.value += 0.02f;
+        sliderVelocidadeJ1.value += 0.01f;
     }
     public void velocidadeJ2Min(){
-        sliderVelocidadeJ2.value -= 0.02f;
+        sliderVelocidadeJ2.value -= 0.01f;
     }
     public void VelocidadeJ2Max(){
-        sliderVelocidadeJ2.value += 0.02f;
+        sliderVelocidadeJ2.value += 0.01f;
     }
     public void velocidadeJ3Min(){
-        sliderVelocidadeJ3.value -= 0.02f;
+        sliderVelocidadeJ3.value -= 0.01f;
     }
     public void VelocidadeJ3Max(){
-        sliderVelocidadeJ3.value += 0.02f;
+        sliderVelocidadeJ3.value += 0.01f;
     }
     public void velocidadeJ4Min(){
-        sliderVelocidadeJ4.value -= 0.02f;
+        sliderVelocidadeJ4.value -= 0.01f;
     }
     public void VelocidadeJ4Max(){
-        sliderVelocidadeJ4.value += 0.02f;
+        sliderVelocidadeJ4.value += 0.01f;
     }
     public void velocidadeJ5Min(){
-        sliderVelocidadeJ5.value -= 0.02f;
+        sliderVelocidadeJ5.value -= 0.01f;
     }
     public void VelocidadeJ5Max(){
-        sliderVelocidadeJ5.value += 0.02f;
+        sliderVelocidadeJ5.value += 0.01f;
     }
 
 }

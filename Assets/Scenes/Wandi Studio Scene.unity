@@ -1307,13 +1307,13 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 300461466}
-        m_TargetAssemblyTypeName: 
-        m_MethodName: 
+      - m_Target: {fileID: 300461468}
+        m_TargetAssemblyTypeName: wandiController, Assembly-CSharp
+        m_MethodName: velocidadeJ3Min
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: 
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -5951,13 +5951,13 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 300461466}
-        m_TargetAssemblyTypeName: 
-        m_MethodName: 
+      - m_Target: {fileID: 300461468}
+        m_TargetAssemblyTypeName: wandiController, Assembly-CSharp
+        m_MethodName: velocidadeJ2Min
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: 
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -6988,7 +6988,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 148414948548420836, guid: 4180c92d6f88691448bb451ce6736d3f, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 0
+      value: 118.415
       objectReference: {fileID: 0}
     - target: {fileID: 148414948548420836, guid: 4180c92d6f88691448bb451ce6736d3f, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -9488,7 +9488,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7438587978274996553, guid: 4180c92d6f88691448bb451ce6736d3f, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 0
+      value: 128.38
       objectReference: {fileID: 0}
     - target: {fileID: 7438587978274996553, guid: 4180c92d6f88691448bb451ce6736d3f, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -9732,7 +9732,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8070898109115425738, guid: 4180c92d6f88691448bb451ce6736d3f, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 0
+      value: 118.415
       objectReference: {fileID: 0}
     - target: {fileID: 8070898109115425738, guid: 4180c92d6f88691448bb451ce6736d3f, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -11317,13 +11317,13 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 300461466}
-        m_TargetAssemblyTypeName: 
-        m_MethodName: 
+      - m_Target: {fileID: 300461468}
+        m_TargetAssemblyTypeName: wandiController, Assembly-CSharp
+        m_MethodName: VelocidadeJ5Max
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: 
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -12479,13 +12479,13 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 300461466}
-        m_TargetAssemblyTypeName: 
-        m_MethodName: 
+      - m_Target: {fileID: 300461468}
+        m_TargetAssemblyTypeName: wandiController, Assembly-CSharp
+        m_MethodName: VelocidadeJ4Max
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: 
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -14645,13 +14645,13 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 300461466}
-        m_TargetAssemblyTypeName: 
-        m_MethodName: 
+      - m_Target: {fileID: 300461468}
+        m_TargetAssemblyTypeName: wandiController, Assembly-CSharp
+        m_MethodName: velocidadeJ5Min
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: 
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -15937,13 +15937,13 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 300461466}
-        m_TargetAssemblyTypeName: 
-        m_MethodName: 
+      - m_Target: {fileID: 300461468}
+        m_TargetAssemblyTypeName: wandiController, Assembly-CSharp
+        m_MethodName: VelocidadeJ2Max
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: 
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -16355,13 +16355,13 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 300461466}
-        m_TargetAssemblyTypeName: 
-        m_MethodName: 
+      - m_Target: {fileID: 300461468}
+        m_TargetAssemblyTypeName: wandiController, Assembly-CSharp
+        m_MethodName: velocidadeJ4Min
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: 
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -17618,13 +17618,13 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 300461466}
-        m_TargetAssemblyTypeName: 
-        m_MethodName: 
+      - m_Target: {fileID: 300461468}
+        m_TargetAssemblyTypeName: wandiController, Assembly-CSharp
+        m_MethodName: VelocidadeJ3Max
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: 
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 

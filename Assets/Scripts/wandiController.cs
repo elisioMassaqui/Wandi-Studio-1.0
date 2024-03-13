@@ -342,12 +342,6 @@ public class wandiController : MonoBehaviour
     public void VelocidadeJ3Max(){
         sliderVelocidadeJ3.value += 0.02f;
     }
-    public void velocidadeJ3Min(){
-        sliderVelocidadeJ1.value -= 0.02f;
-    }
-    public void VelocidadeJ3Max(){
-        sliderVelocidadeJ3.value += 0.02f;
-    }
     public void velocidadeJ4Min(){
         sliderVelocidadeJ4.value -= 0.02f;
     }

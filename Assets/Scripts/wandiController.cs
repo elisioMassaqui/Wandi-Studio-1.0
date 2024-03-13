@@ -197,16 +197,13 @@ public class wandiController : MonoBehaviour
         string[] ports = SerialPort.GetPortNames();
 
         // Limpar as opções existentes no dropdown
-        portDropdown.ClearOptions();
+        //portDropdown.ClearOptions(); Melhor não limpar a lista, porque a primeira opção nunca vai directamente pra Selected,a primeira opçao fica como uma sms e outras são as portas incrementadas.
 
         // Adicionar as portas detectadas como opções no dropdown
         portDropdown.AddOptions(new List<string>(ports));
 
         // Adicionar um listener para o evento de seleção do dropdown
         portDropdown.onValueChanged.AddListener(OnPortDropdownValueChanged);
-
-        //String da Porta Arduino do metodo open porta recebe porta selecionada do dropdown
-        portaArduino = selectedPort;
 
     }
 

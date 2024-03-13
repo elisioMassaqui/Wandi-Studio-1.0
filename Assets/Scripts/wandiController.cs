@@ -100,6 +100,8 @@ public class wandiController : MonoBehaviour
 
         //Nºao incicie o progresso de conection ao iniciar o app
         progressConect.SetActive(false);
+        //Nºao inicializei o home
+        rotacionar = false;
     }
 
     
@@ -152,70 +154,13 @@ public class wandiController : MonoBehaviour
         {
             //Manda pra o Wandi Robot inicializar o HOME
             serialPort.Write("X");
+            rotacionar = !false;
             Debug.Log("X");
 
             progressConect.SetActive(false);
-
-             //Juntas Steps/s
-            origemJ1.localRotation = Quaternion.Slerp(origemJ1.localRotation, Quaternion.Euler(0, -88, 0), velocidadeJ1);
-            origemJ2.localRotation = Quaternion.Slerp(origemJ2.localRotation, Quaternion.Euler(0, 0, 10), velocidadeJ2);
-            //Juntas Graus/s
-            origemJ3.localRotation = Quaternion.Slerp(origemJ3.localRotation, Quaternion.Euler(0, 0, -88), velocidadeJ3);
-            origemJ4.localRotation = Quaternion.Slerp(origemJ4.localRotation, Quaternion.Euler(0, -2, 0), velocidadeJ4);
-            origemJ5.localRotation = Quaternion.Slerp(origemJ5.localRotation, Quaternion.Euler(0, 2, 0), velocidadeJ5);
-            //falta J6, mas é básico.
-
-            //Para base na esteira
-            baseEsteiraOrigem.localPosition = Vector3.Lerp(baseEsteiraOrigem.localPosition, basePosition, baseVelocidade);
-            vectores = basePosition.y - basePosition.z;
-
-
-            // Sincronizar a posiçao com WR
-            /*
-            RotationJ2Z = 10f;
-            RotationJ3Z = 278f;
-            RotationJ4Z = -48f;
-            */
-
-            // Apos conecetar a porta vai sincronizar a posiçao com WR e os dados irao pra UI
-            SincronizadaJ1UI.text = "Posição J1.Y: " + origemJ1.localRotation.ToString("F1");
-            SincronizadaJ2UI.text = "Posição J2.Z: " + origemJ2.localRotation.ToString("F1");
-            SincronizadaJ3UI.text = "Posição J3.Z: " + origemJ3.localRotation.ToString("F1");
-            SincronizadaJ4UI.text = "Posição J4.Y: " + origemJ4.localRotation.ToString("F1");
-            SincronizadaJ5UI.text = "Posição J5.Y: " + origemJ5.localRotation.ToString("F1");
         }
         
     }
-
-
-    // Atualiza a lista de portas e o dropdown
-    public void AtualizarPortas()
-    {
-        // Obter a lista de portas disponíveis
-        ports = SerialPort.GetPortNames();
-
-        // Limpar as opções existentes no dropdown
-        portDropdown.ClearOptions();
-        // Adicionar as portas detectadas como opções no dropdown
-        portDropdown.AddOptions(new List<string>(ports));
-        
-        // Adicionar um listener para o evento de seleção do dropdown
-        portDropdown.onValueChanged.AddListener(OnPortDropdownValueChanged);
-
-    }
-
-    // Manipula a mudança na seleção do dropdown
-    public void OnPortDropdownValueChanged(int index)
-    {
-        //Percorre o index atual selecioonado
-        selectedPort = portDropdown.options[index].text;
-        Debug.Log("Porta selecionada: " + selectedPort);
-        //String da Porta Arduino do metodo open porta recebe porta selecionada do dropdown
-        portaArduino = selectedPort;
-
-        // Você pode fazer o que quiser com a porta selecionada, como iniciar a comunicação serial, etc.
-    }
-
 
     // Update is called once per frame.
     void Update()
@@ -259,14 +204,26 @@ public class wandiController : MonoBehaviour
 
           if(rotacionar)
           {
-                //Juntas Steps/s
-                origemJ1.localRotation = Quaternion.Slerp(origemJ1.localRotation, Quaternion.Euler(0, destinoJ1, 0), velocidadeJ1);
-                origemJ2.localRotation = Quaternion.Slerp(origemJ2.localRotation, Quaternion.Euler(0, 0, destinoJ2), velocidadeJ2);
-                //Juntas Graus/s
-                origemJ3.localRotation = Quaternion.Slerp(origemJ3.localRotation, Quaternion.Euler(0, 0, destinoJ3), velocidadeJ3);
-                origemJ4.localRotation = Quaternion.Slerp(origemJ4.localRotation, Quaternion.Euler(0, destinoJ4, 0), velocidadeJ4);
-                origemJ5.localRotation = Quaternion.Slerp(origemJ5.localRotation, Quaternion.Euler(0, destinoJ5, 0), velocidadeJ5);
-                //falta J6, mas é básico.
+             
+             //Juntas Steps/s
+            origemJ1.localRotation = Quaternion.Slerp(origemJ1.localRotation, Quaternion.Euler(0, destinoJ1, 0), velocidadeJ1);
+            origemJ2.localRotation = Quaternion.Slerp(origemJ2.localRotation, Quaternion.Euler(0, 0, destinoJ2), velocidadeJ2);
+            //Juntas Graus/s
+            origemJ3.localRotation = Quaternion.Slerp(origemJ3.localRotation, Quaternion.Euler(0, 0, destinoJ3), velocidadeJ3);
+            origemJ4.localRotation = Quaternion.Slerp(origemJ4.localRotation, Quaternion.Euler(0, destinoJ4, 0), velocidadeJ4);
+            origemJ5.localRotation = Quaternion.Slerp(origemJ5.localRotation, Quaternion.Euler(0, destinoJ5, 0), velocidadeJ5);
+            //falta J6, mas é básico.
+
+            //Para base na esteira
+            baseEsteiraOrigem.localPosition = Vector3.Lerp(baseEsteiraOrigem.localPosition, basePosition, baseVelocidade);
+            vectores = basePosition.y - basePosition.z;
+
+            // Apos conecetar a porta vai sincronizar a posiçao com WR e os dados irao pra UI
+            SincronizadaJ1UI.text = "Posição J1.Y: " + origemJ1.localRotation.ToString("F1");
+            SincronizadaJ2UI.text = "Posição J2.Z: " + origemJ2.localRotation.ToString("F1");
+            SincronizadaJ3UI.text = "Posição J3.Z: " + origemJ3.localRotation.ToString("F1");
+            SincronizadaJ4UI.text = "Posição J4.Y: " + origemJ4.localRotation.ToString("F1");
+            SincronizadaJ5UI.text = "Posição J5.Y: " + origemJ5.localRotation.ToString("F1");
           }
           
     }
@@ -306,5 +263,35 @@ public class wandiController : MonoBehaviour
     public void J5Min(){
         destinoJ5 -= 1f;
     }
+
+
+        // Atualiza a lista de portas e o dropdown
+    public void AtualizarPortas()
+    {
+        // Obter a lista de portas disponíveis
+        ports = SerialPort.GetPortNames();
+
+        // Limpar as opções existentes no dropdown
+        portDropdown.ClearOptions();
+        // Adicionar as portas detectadas como opções no dropdown
+        portDropdown.AddOptions(new List<string>(ports));
+        
+        // Adicionar um listener para o evento de seleção do dropdown
+        portDropdown.onValueChanged.AddListener(OnPortDropdownValueChanged);
+
+    }
+
+    // Manipula a mudança na seleção do dropdown
+    public void OnPortDropdownValueChanged(int index)
+    {
+        //Percorre o index atual selecioonado
+        selectedPort = portDropdown.options[index].text;
+        Debug.Log("Porta selecionada: " + selectedPort);
+        //String da Porta Arduino do metodo open porta recebe porta selecionada do dropdown
+        portaArduino = selectedPort;
+
+        // Você pode fazer o que quiser com a porta selecionada, como iniciar a comunicação serial, etc.
+    }
+
 
 }

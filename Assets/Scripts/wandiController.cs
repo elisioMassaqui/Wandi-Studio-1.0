@@ -263,9 +263,11 @@ public class wandiController : MonoBehaviour
     //Buttons para Steps/s
     public void J1Max(){
         destinoJ1 += 5f;
+        serialPort.Write("A");
     } 
     public void J1Min(){
         destinoJ1 -= 5f;
+        serialPort.Write("B");
     }
     public void J2Max(){
         destinoJ2 += 5f;

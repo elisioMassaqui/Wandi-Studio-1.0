@@ -62,7 +62,7 @@ public class wandiController : MonoBehaviour
     public GameObject progressConect; // Processar ao conectar a porta dentro de um IEnumerator
     //PortDrodown
     public TMP_Dropdown portDropdown;
-    public TextMeshProUGUI portaSelecionada;
+    public string selectedPort;
     
     [Header("Angulos das Juntas Na UI")]
     public TextMeshProUGUI anguloJ1;  //Mostrar, o angulo da junta a ser movida, em tempo real na tela.
@@ -97,6 +97,9 @@ public class wandiController : MonoBehaviour
         serialPort.BaudRate = 9600;
 
         progressConect.SetActive(false);
+
+        //PortDrodown
+        AtualizarPortas();
     }
 
     
@@ -142,27 +145,24 @@ public class wandiController : MonoBehaviour
 
         if (serialPort.IsOpen)
         {
-            progressConect.SetActive(false);
-                 //Juntas Steps/s
-                origemJ1.localRotation = Quaternion.Slerp(origemJ1.localRotation, Quaternion.Euler(0, -88, 0), velocidadeJ1);
-                origemJ2.localRotation = Quaternion.Slerp(origemJ2.localRotation, Quaternion.Euler(0, 0, 10), velocidadeJ2);
-                //Juntas Graus/s
-                origemJ3.localRotation = Quaternion.Slerp(origemJ3.localRotation, Quaternion.Euler(0, 0, -88), velocidadeJ3);
-                origemJ4.localRotation = Quaternion.Slerp(origemJ4.localRotation, Quaternion.Euler(0, -2, 0), velocidadeJ4);
-                origemJ5.localRotation = Quaternion.Slerp(origemJ5.localRotation, Quaternion.Euler(0, 2, 0), velocidadeJ5);
-                //falta J6, mas é básico.
-
-                //Para base na esteira
-                baseEsteiraOrigem.localPosition = Vector3.Lerp(baseEsteiraOrigem.localPosition, basePosition, baseVelocidade);
-                vectores = basePosition.y - basePosition.z;
-        }
-        
-    }
-
-        public void iniciarSistemaHome (){
-        if(serialPort.IsOpen){
             serialPort.Write("X");
             Debug.Log("X");
+
+            progressConect.SetActive(false);
+
+             //Juntas Steps/s
+            origemJ1.localRotation = Quaternion.Slerp(origemJ1.localRotation, Quaternion.Euler(0, -88, 0), velocidadeJ1);
+            origemJ2.localRotation = Quaternion.Slerp(origemJ2.localRotation, Quaternion.Euler(0, 0, 10), velocidadeJ2);
+            //Juntas Graus/s
+            origemJ3.localRotation = Quaternion.Slerp(origemJ3.localRotation, Quaternion.Euler(0, 0, -88), velocidadeJ3);
+            origemJ4.localRotation = Quaternion.Slerp(origemJ4.localRotation, Quaternion.Euler(0, -2, 0), velocidadeJ4);
+            origemJ5.localRotation = Quaternion.Slerp(origemJ5.localRotation, Quaternion.Euler(0, 2, 0), velocidadeJ5);
+            //falta J6, mas é básico.
+
+            //Para base na esteira
+            baseEsteiraOrigem.localPosition = Vector3.Lerp(baseEsteiraOrigem.localPosition, basePosition, baseVelocidade);
+            vectores = basePosition.y - basePosition.z;
+
 
             // Sincronizar a posiçao com WR
             /*
@@ -178,7 +178,9 @@ public class wandiController : MonoBehaviour
             SincronizadaJ4UI.text = "Posição J4.Y: " + origemJ4.localRotation.ToString("F1");
             SincronizadaJ5UI.text = "Posição J5.Y: " + origemJ5.localRotation.ToString("F1");
         }
+        
     }
+
 
     // Atualiza a lista de portas e o dropdown
     public void AtualizarPortas()
@@ -199,9 +201,9 @@ public class wandiController : MonoBehaviour
     // Manipula a mudança na seleção do dropdown
     private void OnPortDropdownValueChanged(int index)
     {
-        string selectedPort = portDropdown.options[index].text;
+        selectedPort = portDropdown.options[index].text;
         Debug.Log("Porta selecionada: " + selectedPort);
-        portaSelecionada.text = selectedPort;
+        portaArduino = selectedPort;
 
         // Você pode fazer o que quiser com a porta selecionada, como iniciar a comunicação serial, etc.
     }
@@ -240,9 +242,6 @@ public class wandiController : MonoBehaviour
         else if(!serialPort.IsOpen){
             imageConnect.color = Color.red;
         }
-
-        //PortDropdown
-        AtualizarPortas();
 
 
     

@@ -60,6 +60,9 @@ public class wandiController : MonoBehaviour
     public Image imageConnect; // Mudar a cor da imagem de vermelho pra verde pra conectar.
     public Image remoteImage; // 
     public GameObject progressConect; // Processar ao conectar a porta dentro de um IEnumerator
+    //PortDrodown
+    public TMP_Dropdown portDropdown;
+    public TextMeshProUGUI portaSelecionada;
     
     [Header("Angulos das Juntas Na UI")]
     public TextMeshProUGUI anguloJ1;  //Mostrar, o angulo da junta a ser movida, em tempo real na tela.
@@ -96,7 +99,8 @@ public class wandiController : MonoBehaviour
         progressConect.SetActive(false);
     }
 
-
+    
+      //Botão pra abrir conectar a porta
       public void OpenPorta(){
         try
         {
@@ -114,7 +118,7 @@ public class wandiController : MonoBehaviour
 
     }
 
-
+    //Botão pra fechar
     public void ClosePort()
     {
         // Fechar a porta se estiver aberta
@@ -127,6 +131,7 @@ public class wandiController : MonoBehaviour
         }
     }
 
+    //O que fazer enquanto conecta a porta.
     IEnumerator remoteConected(){
         
         progressConect.SetActive(true);
@@ -138,6 +143,18 @@ public class wandiController : MonoBehaviour
         if (serialPort.IsOpen)
         {
             progressConect.SetActive(false);
+                 //Juntas Steps/s
+                origemJ1.localRotation = Quaternion.Slerp(origemJ1.localRotation, Quaternion.Euler(0, -88, 0), velocidadeJ1);
+                origemJ2.localRotation = Quaternion.Slerp(origemJ2.localRotation, Quaternion.Euler(0, 0, 10), velocidadeJ2);
+                //Juntas Graus/s
+                origemJ3.localRotation = Quaternion.Slerp(origemJ3.localRotation, Quaternion.Euler(0, 0, -88), velocidadeJ3);
+                origemJ4.localRotation = Quaternion.Slerp(origemJ4.localRotation, Quaternion.Euler(0, -2, 0), velocidadeJ4);
+                origemJ5.localRotation = Quaternion.Slerp(origemJ5.localRotation, Quaternion.Euler(0, 2, 0), velocidadeJ5);
+                //falta J6, mas é básico.
+
+                //Para base na esteira
+                baseEsteiraOrigem.localPosition = Vector3.Lerp(baseEsteiraOrigem.localPosition, basePosition, baseVelocidade);
+                vectores = basePosition.y - basePosition.z;
         }
         
     }
@@ -163,6 +180,32 @@ public class wandiController : MonoBehaviour
         }
     }
 
+    // Atualiza a lista de portas e o dropdown
+    public void AtualizarPortas()
+    {
+        // Obter a lista de portas disponíveis
+        string[] ports = SerialPort.GetPortNames();
+
+        // Limpar as opções existentes no dropdown
+        portDropdown.ClearOptions();
+
+        // Adicionar as portas detectadas como opções no dropdown
+        portDropdown.AddOptions(new List<string>(ports));
+
+        // Adicionar um listener para o evento de seleção do dropdown
+        portDropdown.onValueChanged.AddListener(OnPortDropdownValueChanged);
+    }
+
+    // Manipula a mudança na seleção do dropdown
+    private void OnPortDropdownValueChanged(int index)
+    {
+        string selectedPort = portDropdown.options[index].text;
+        Debug.Log("Porta selecionada: " + selectedPort);
+        portaSelecionada.text = selectedPort;
+
+        // Você pode fazer o que quiser com a porta selecionada, como iniciar a comunicação serial, etc.
+    }
+
 
     // Update is called once per frame.
     void Update()
@@ -176,13 +219,14 @@ public class wandiController : MonoBehaviour
           baseVelocidade = Mathf.Clamp(baseVelocidade, 0.000f, 0.09f);
 
 
-         //o texto do angulo J da UI vai receber a string concatenada com o progresso do seu angulo.
+         //O texto do angulo J da UI vai receber a string concatenada com o progresso do seu angulo.
         anguloJ1.text = "Angulo J1.Y: " + origemJ1.localRotation.y.ToString("F2");
         anguloJ2.text = "Angulo J2.Z: " + origemJ2.localRotation.z.ToString("F2");
         anguloJ3.text = "Angulo J3.Z: " + origemJ3.localRotation.z.ToString("F2");
         anguloJ4.text = "Angulo J4.Y: " + origemJ4.localRotation.y.ToString("F2");
         anguloJ5.text = "Angulo J5.Y: " + origemJ5.localRotation.y.ToString("F2");
 
+        //As caixas de textos na ui no lado esquerdo dos buttons vão receber valor unitário aplicados nos vectores imaginarios.
         unitJ1.text = destinoJ1.ToString();
         unitJ2.text = destinoJ2.ToString();
         unitJ3.text = destinoJ3.ToString();
@@ -196,6 +240,9 @@ public class wandiController : MonoBehaviour
         else if(!serialPort.IsOpen){
             imageConnect.color = Color.red;
         }
+
+        //PortDropdown
+        AtualizarPortas();
 
 
     
@@ -213,21 +260,6 @@ public class wandiController : MonoBehaviour
                 origemJ4.localRotation = Quaternion.Slerp(origemJ4.localRotation, Quaternion.Euler(0, destinoJ4, 0), velocidadeJ4);
                 origemJ5.localRotation = Quaternion.Slerp(origemJ5.localRotation, Quaternion.Euler(0, destinoJ5, 0), velocidadeJ5);
                 //falta J6, mas é básico.
-          }
-
-          if(home){
-                   //Juntas Steps/s
-                origemJ1.localRotation = Quaternion.Slerp(origemJ1.localRotation, Quaternion.Euler(0, -88, 0), velocidadeJ1);
-                origemJ2.localRotation = Quaternion.Slerp(origemJ2.localRotation, Quaternion.Euler(0, 0, 10), velocidadeJ2);
-                //Juntas Graus/s
-                origemJ3.localRotation = Quaternion.Slerp(origemJ3.localRotation, Quaternion.Euler(0, 0, -88), velocidadeJ3);
-                origemJ4.localRotation = Quaternion.Slerp(origemJ4.localRotation, Quaternion.Euler(0, -2, 0), velocidadeJ4);
-                origemJ5.localRotation = Quaternion.Slerp(origemJ5.localRotation, Quaternion.Euler(0, 2, 0), velocidadeJ5);
-                //falta J6, mas é básico.
-
-                //Para base na esteira
-                baseEsteiraOrigem.localPosition = Vector3.Lerp(baseEsteiraOrigem.localPosition, basePosition, baseVelocidade);
-                vectores = basePosition.y - basePosition.z;
           }
           
     }

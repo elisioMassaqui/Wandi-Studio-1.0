@@ -204,6 +204,9 @@ public class wandiController : MonoBehaviour
 
         // Adicionar um listener para o evento de seleção do dropdown
         portDropdown.onValueChanged.AddListener(OnPortDropdownValueChanged);
+
+        //Percorre o index atual selecioonado
+        selectedPort = portDropdown.options[index].text;
     }
 
     // Manipula a mudança na seleção do dropdown

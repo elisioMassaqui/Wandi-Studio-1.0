@@ -73,7 +73,7 @@ public class wandiController : MonoBehaviour
     public TextMeshProUGUI anguloJ4;
     public TextMeshProUGUI anguloJ5;
 
-    [Header("Posição Sincronizada")]
+    [Header("Posição Sincronizada na UI")]
     public TextMeshProUGUI SincronizadaJ1UI;
     public TextMeshProUGUI SincronizadaJ2UI;
     public TextMeshProUGUI SincronizadaJ3UI;
@@ -86,7 +86,20 @@ public class wandiController : MonoBehaviour
     public TextMeshProUGUI unitJ3;
     public TextMeshProUGUI unitJ4;
     public TextMeshProUGUI unitJ5;
-    
+
+    [Header("Buttton e Slider Pra Velocidade na UI")]
+    public Slider sliderVelocidadeJ1;
+    public Slider sliderVelocidadeJ2;
+    public Slider sliderVelocidadeJ3;
+    public Slider sliderVelocidadeJ4;
+    public Slider sliderVelocidadeJ5;
+
+    [Header("Mostrar Na UI Velocidade Das Juntas")]
+    public TextMeshProUGUI mostrarVelocidadeJ1UI;
+    public TextMeshProUGUI mostrarVelocidadeJ2UI;
+    public TextMeshProUGUI mostrarVelocidadeJ3UI;
+    public TextMeshProUGUI mostrarVelocidadeJ4UI;
+    public TextMeshProUGUI mostrarVelocidadeJ5UI;
 
 
     // Start is called before the first frame update......
@@ -166,12 +179,27 @@ public class wandiController : MonoBehaviour
     void Update()
     {
         //Limitar o valor da velocidade entre 0....e....1.
-          velocidadeJ1 = Mathf.Clamp(velocidadeJ1, 0.000f, 0.09f);
-          velocidadeJ2 = Mathf.Clamp(velocidadeJ2, 0.000f, 0.09f);
-          velocidadeJ3 = Mathf.Clamp(velocidadeJ3, 0.000f, 0.09f);
-          velocidadeJ4 = Mathf.Clamp(velocidadeJ4, 0.000f, 0.09f);
-          velocidadeJ5 = Mathf.Clamp(velocidadeJ5, 0.000f, 0.09f);
-          baseVelocidade = Mathf.Clamp(baseVelocidade, 0.000f, 0.09f);
+          sliderVelocidadeJ1.value = Mathf.Clamp(sliderVelocidadeJ1.value, 0.00f, 0.09f);
+          sliderVelocidadeJ2.value = Mathf.Clamp(sliderVelocidadeJ2.value, 0.00f, 0.09f);
+          sliderVelocidadeJ3.value = Mathf.Clamp(sliderVelocidadeJ3.value, 0.00f, 0.09f);
+          sliderVelocidadeJ4.value = Mathf.Clamp(sliderVelocidadeJ4.value, 0.00f, 0.09f);
+          sliderVelocidadeJ5.value = Mathf.Clamp(sliderVelocidadeJ5.value, 0.00f, 0.09f);
+          baseVelocidade = Mathf.Clamp(baseVelocidade, 0.00f, 0.09f);
+        
+        //A float da velocidade vai receber o valor do slider
+          velocidadeJ1 = sliderVelocidadeJ1.value;
+          velocidadeJ2 = sliderVelocidadeJ2.value;
+          velocidadeJ3 = sliderVelocidadeJ3.value;
+          velocidadeJ4 = sliderVelocidadeJ4.value;
+          velocidadeJ5 = sliderVelocidadeJ5.value;
+
+         // Mostrar a velociade ao lado controlador slider de velocidade
+          mostrarVelocidadeJ1UI.text = velocidadeJ1.ToString("F2");
+          mostrarVelocidadeJ2UI.text = velocidadeJ2.ToString("F2");
+          mostrarVelocidadeJ3UI.text = velocidadeJ3.ToString("F2");
+          mostrarVelocidadeJ4UI.text = velocidadeJ4.ToString("F2");
+          mostrarVelocidadeJ5UI.text = velocidadeJ5.ToString("F2");
+          
 
 
          //O texto do angulo J da UI vai receber a string concatenada com o progresso do seu angulo.
@@ -194,6 +222,8 @@ public class wandiController : MonoBehaviour
         }
         else if(!serialPort.IsOpen){
             imageConnect.color = Color.red;
+            rotacionar = !true;
+            home = !true;
         }
 
 
@@ -293,5 +323,42 @@ public class wandiController : MonoBehaviour
         // Você pode fazer o que quiser com a porta selecionada, como iniciar a comunicação serial, etc.
     }
 
+    //Velocidade do slider pode se incrementar e decrementar aqui e pra cada funçºao pode enviar algum char no Wandi Robot pra mudar a velocidade lá também, ao mesmo tempooo
+    public void velocidadeJ1Min(){
+        sliderVelocidadeJ1.value -= 0.02f;
+    }
+    public void VelocidadeJ1Max(){
+        sliderVelocidadeJ1.value += 0.02f;
+    }
+    public void velocidadeJ2Min(){
+        sliderVelocidadeJ2.value -= 0.02f;
+    }
+    public void VelocidadeJ2Max(){
+        sliderVelocidadeJ2.value += 0.02f;
+    }
+    public void velocidadeJ3Min(){
+        sliderVelocidadeJ3.value -= 0.02f;
+    }
+    public void VelocidadeJ3Max(){
+        sliderVelocidadeJ3.value += 0.02f;
+    }
+    public void velocidadeJ3Min(){
+        sliderVelocidadeJ1.value -= 0.02f;
+    }
+    public void VelocidadeJ3Max(){
+        sliderVelocidadeJ3.value += 0.02f;
+    }
+    public void velocidadeJ4Min(){
+        sliderVelocidadeJ4.value -= 0.02f;
+    }
+    public void VelocidadeJ4Max(){
+        sliderVelocidadeJ4.value += 0.02f;
+    }
+    public void velocidadeJ5Min(){
+        sliderVelocidadeJ5.value -= 0.02f;
+    }
+    public void VelocidadeJ5Max(){
+        sliderVelocidadeJ5.value += 0.02f;
+    }
 
 }

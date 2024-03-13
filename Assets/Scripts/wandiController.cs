@@ -64,6 +64,7 @@ public class wandiController : MonoBehaviour
     [Header("PortDrodown")]
     public TMP_Dropdown portDropdown; //Escolher, procurar e atualizar porta.
     public string selectedPort; //Envia para portaArduino
+    public string[] ports;
     
     [Header("Angulos das Juntas Na UI")]
     public TextMeshProUGUI anguloJ1;  //Mostrar, o angulo da junta a ser movida, em tempo real na tela.
@@ -99,9 +100,6 @@ public class wandiController : MonoBehaviour
 
         //Nºao incicie o progresso de conection ao iniciar o app
         progressConect.SetActive(false);
-
-        //PortDrodown
-        AtualizarPortas();
     }
 
     
@@ -194,14 +192,13 @@ public class wandiController : MonoBehaviour
     public void AtualizarPortas()
     {
         // Obter a lista de portas disponíveis
-        string[] ports = SerialPort.GetPortNames();
+        ports = SerialPort.GetPortNames();
 
         // Limpar as opções existentes no dropdown
-        //portDropdown.ClearOptions(); Melhor não limpar a lista, porque a primeira opção nunca vai directamente pra Selected,a primeira opçao fica como uma sms e outras são as portas incrementadas.
-
+        portDropdown.ClearOptions();
         // Adicionar as portas detectadas como opções no dropdown
         portDropdown.AddOptions(new List<string>(ports));
-
+        
         // Adicionar um listener para o evento de seleção do dropdown
         portDropdown.onValueChanged.AddListener(OnPortDropdownValueChanged);
 

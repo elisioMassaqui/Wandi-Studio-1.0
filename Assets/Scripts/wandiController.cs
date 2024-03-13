@@ -205,6 +205,9 @@ public class wandiController : MonoBehaviour
         // Adicionar um listener para o evento de seleção do dropdown
         portDropdown.onValueChanged.AddListener(OnPortDropdownValueChanged);
 
+        //String da Porta Arduino do metodo open porta recebe porta selecionada do dropdown
+        portaArduino = selectedPort;
+
     }
 
     // Manipula a mudança na seleção do dropdown

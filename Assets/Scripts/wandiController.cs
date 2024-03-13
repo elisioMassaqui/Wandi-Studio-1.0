@@ -54,15 +54,16 @@ public class wandiController : MonoBehaviour
     */
 
     [Header("Pra Usuário Definir A Porta Ou Tipo De Arduino.")]
-    public string portaArduino; // porta do arduino em string.
+    public string portaArduino; // porta do arduino em string receba da selectedPort.
     public TextMeshProUGUI statusPort; // Texto de estado da porta.
     public Toggle conectionSerial; //
     public Image imageConnect; // Mudar a cor da imagem de vermelho pra verde pra conectar.
     public Image remoteImage; // 
     public GameObject progressConect; // Processar ao conectar a porta dentro de um IEnumerator
     //PortDrodown
-    public TMP_Dropdown portDropdown;
-    public string selectedPort;
+    [Header("PortDrodown")]
+    public TMP_Dropdown portDropdown; //Escolher, procurar e atualizar porta.
+    public string selectedPort; //Envia para portaArduino
     
     [Header("Angulos das Juntas Na UI")]
     public TextMeshProUGUI anguloJ1;  //Mostrar, o angulo da junta a ser movida, em tempo real na tela.
@@ -96,6 +97,7 @@ public class wandiController : MonoBehaviour
         // Configurar outras configurações do SerialPort, se necessário.
         serialPort.BaudRate = 9600;
 
+        //Nºao incicie o progresso de conection ao iniciar o app
         progressConect.SetActive(false);
 
         //PortDrodown
@@ -107,9 +109,10 @@ public class wandiController : MonoBehaviour
       public void OpenPorta(){
         try
         {
-        //Recebe o nome da porta da variavel que vai receber do Input.
+        //Recebe o nome da porta da variavel que vai receber do Input uma outra String.
             serialPort.PortName = portaArduino;
             serialPort.Open();
+            //Mensagem quando a porta estiver aberta
             statusPort.text = "A sua porta: |" + portaArduino + "| Foi Aberta Com Sucesso!";
             StartCoroutine(remoteConected());
         }
@@ -137,14 +140,19 @@ public class wandiController : MonoBehaviour
     //O que fazer enquanto conecta a porta.
     IEnumerator remoteConected(){
         
+        //Inicie o progresso de conexºao
         progressConect.SetActive(true);
 
+        //Passe alguns segundos
         yield return new WaitForSeconds(6f);
         
+        //Trocar a cor dessa imagem na parte central inferior da tela, pra azul
         remoteImage.color = Color.blue;
 
+        //Se estiver aberta
         if (serialPort.IsOpen)
         {
+            //Manda pra o Wandi Robot inicializar o HOME
             serialPort.Write("X");
             Debug.Log("X");
 
@@ -201,8 +209,10 @@ public class wandiController : MonoBehaviour
     // Manipula a mudança na seleção do dropdown
     private void OnPortDropdownValueChanged(int index)
     {
+        //Percorre o index atual selecioonado
         selectedPort = portDropdown.options[index].text;
         Debug.Log("Porta selecionada: " + selectedPort);
+        //String da Porta Arduino do metodo open porta recebe porta selecionada do dropdown
         portaArduino = selectedPort;
 
         // Você pode fazer o que quiser com a porta selecionada, como iniciar a comunicação serial, etc.

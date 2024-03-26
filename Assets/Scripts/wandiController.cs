@@ -240,7 +240,7 @@ public class wandiController : MonoBehaviour
             origemJ2.localRotation = Quaternion.Slerp(origemJ2.localRotation, Quaternion.Euler(0, 0, destinoJ2), velocidadeJ2);
             //Juntas Graus/s
             origemJ3.localRotation = Quaternion.Slerp(origemJ3.localRotation, Quaternion.Euler(0, 0, destinoJ3), velocidadeJ3);
-            origemJ4.localRotation = Quaternion.Slerp(origemJ4.localRotation, Quaternion.Euler(0, destinoJ4, 0), velocidadeJ4);
+            origemJ4.localRotation = Quaternion.Slerp(origemJ4.localRotation, Quaternion.Euler(0, 0, destinoJ4), velocidadeJ4);
             origemJ5.localRotation = Quaternion.Slerp(origemJ5.localRotation, Quaternion.Euler(0, destinoJ5, 0), velocidadeJ5);
             //falta J6, mas é básico.
 
@@ -253,7 +253,7 @@ public class wandiController : MonoBehaviour
             SincronizadaJ2UI.text = "Posição J2.Z: " + origemJ2.localRotation.ToString("F1");
             SincronizadaJ3UI.text = "Posição J3.Z: " + origemJ3.localRotation.ToString("F1");
             SincronizadaJ4UI.text = "Posição J4.Y: " + origemJ4.localRotation.ToString("F1");
-            SincronizadaJ5UI.text = "Posição J5.Y: " + origemJ5.localRotation.ToString("F1");
+            SincronizadaJ5UI.text = "Posição3 J5.Y: " + origemJ5.localRotation.ToString("F1");
           }
           
     }
@@ -271,9 +271,11 @@ public class wandiController : MonoBehaviour
     }
     public void J2Max(){
         destinoJ2 += 5f;
+        serialPort.Write("C");
     }
     public void J2Min(){
         destinoJ2 -= 5f;
+        serialPort.Write("D");
     } 
 
     //Buttons para Graus/s
@@ -322,7 +324,18 @@ public class wandiController : MonoBehaviour
         //String da Porta Arduino do metodo open porta recebe porta selecionada do dropdown
         portaArduino = selectedPort;
 
+        statusPort.text = selectedPort;
+
         // Você pode fazer o que quiser com a porta selecionada, como iniciar a comunicação serial, etc.
+    }
+    public void portAtual(int index){
+        //Percorre o index atual selecioonado
+        selectedPort = portDropdown.options[index].text;
+        Debug.Log("Porta selecionada: " + selectedPort);
+        //String da Porta Arduino do metodo open porta recebe porta selecionada do dropdown
+        portaArduino = selectedPort;
+
+        statusPort.text = selectedPort;
     }
 
     //Velocidade do slider pode se incrementar e decrementar aqui e pra cada funçºao pode enviar algum char no Wandi Robot pra mudar a velocidade lá também, ao mesmo tempooo

@@ -206,7 +206,7 @@ public class wandiController : MonoBehaviour
         anguloJ1.text = "Angulo J1.Y: " + origemJ1.localRotation.y.ToString("F2");
         anguloJ2.text = "Angulo J2.Z: " + origemJ2.localRotation.z.ToString("F2");
         anguloJ3.text = "Angulo J3.Z: " + origemJ3.localRotation.z.ToString("F2");
-        anguloJ4.text = "Angulo J4.Y: " + origemJ4.localRotation.y.ToString("F2");
+        anguloJ4.text = "Angulo J4.Y: " + origemJ4.localRotation.z.ToString("F2");
         anguloJ5.text = "Angulo J5.Y: " + origemJ5.localRotation.y.ToString("F2");
 
         //As caixas de textos na ui no lado esquerdo dos buttons vão receber valor unitário aplicados nos vectores imaginarios.
@@ -281,21 +281,36 @@ public class wandiController : MonoBehaviour
     //Buttons para Graus/s
     public void J3Max(){
         destinoJ3 += 1f;
+        serialPort.Write("E");
     }
     public void J3Min(){
         destinoJ3 -= 1f;
+        serialPort.Write("F");
     }
     public void J4Max(){
         destinoJ4 += 1f;
+        serialPort.Write("G");
     }
     public void J4Min(){
         destinoJ4 -= 1f;
+        serialPort.Write("H");
     }
     public void J5Max(){
         destinoJ5 += 1f;
+        serialPort.Write("I");
     }
     public void J5Min(){
         destinoJ5 -= 1f;
+        serialPort.Write("J");
+    }
+
+    public void J6Max(){
+        destinoJ5 += 1f;
+        serialPort.Write("K");
+    }
+    public void J6Min(){
+        destinoJ5 -= 1f;
+        serialPort.Write("L");
     }
 
 
@@ -341,33 +356,43 @@ public class wandiController : MonoBehaviour
     //Velocidade do slider pode se incrementar e decrementar aqui e pra cada funçºao pode enviar algum char no Wandi Robot pra mudar a velocidade lá também, ao mesmo tempooo
     public void velocidadeJ1Min(){
         sliderVelocidadeJ1.value -= 0.01f;
+        serialPort.Write("0");
     }
     public void VelocidadeJ1Max(){
         sliderVelocidadeJ1.value += 0.01f;
+        serialPort.Write("1");
     }
     public void velocidadeJ2Min(){
         sliderVelocidadeJ2.value -= 0.01f;
+        serialPort.Write("2");
     }
     public void VelocidadeJ2Max(){
         sliderVelocidadeJ2.value += 0.01f;
+        serialPort.Write("3");
     }
     public void velocidadeJ3Min(){
         sliderVelocidadeJ3.value -= 0.01f;
+        serialPort.Write("4");
     }
     public void VelocidadeJ3Max(){
         sliderVelocidadeJ3.value += 0.01f;
+        serialPort.Write("5");
     }
     public void velocidadeJ4Min(){
         sliderVelocidadeJ4.value -= 0.01f;
+        serialPort.Write("6");
     }
     public void VelocidadeJ4Max(){
         sliderVelocidadeJ4.value += 0.01f;
+        serialPort.Write("7");
     }
     public void velocidadeJ5Min(){
         sliderVelocidadeJ5.value -= 0.01f;
+        serialPort.Write("8");
     }
     public void VelocidadeJ5Max(){
         sliderVelocidadeJ5.value += 0.01f;
+        serialPort.Write("9");
     }
 
 }

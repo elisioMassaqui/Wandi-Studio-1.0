@@ -57,6 +57,7 @@ void loop() {
       break;
       case 'C':
       case 'D':
+      case 'E':
       case 'F':
       case 'G':
       case 'H':

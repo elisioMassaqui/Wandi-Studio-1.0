@@ -4,9 +4,9 @@
 
 Pra esse projecto você vai precisar de apenas:
 - Unity instalado versão 2020 ou superior.
-- Placa de Arduino qualquer versão (Arduino Uno Recomendável) e uma protoboard de qualquer tamanho (Juntammente com 2 botões e uma LED).
+- (Opcional) Placa de Arduino qualquer versão (Arduino Uno Recomendável) e uma protoboard de qualquer tamanho (Juntamente com 2 botões e uma LED).
 
-## [Unity-Arduino Guia Definitivo](https://github.com/elisioMassaqui/Wandi-Studio-1.0/blob/main/Unity-Arduino%20Guia%20Definitivo.md)
+## [Unity-Arduino guia definitivo de conexão e comunicação](https://github.com/elisioMassaqui/Wandi-Studio-1.0/blob/main/Unity-Arduino%20Guia%20Definitivo.md)
 
 Bem-vindo ao Simulador de Braço Robótico desenvolvido pela Causa Efeito! Este projeto foi criado com Unity e C#, permitindo uma simulação avançada do movimento de um braço robótico em tempo real. A comunicação serial com Arduino, implementada em C++, possibilita a interação com a versão física do braço robótico.
 

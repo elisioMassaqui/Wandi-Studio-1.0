@@ -140,7 +140,7 @@ Não esquça que ***TR e RX*** na placa serve pra monitorar a entrada e saída d
 
 Está aqui o script da configuração da placa arduino:
 
-```cpp
+```c
 int led = 13;
 int x = 0;
 

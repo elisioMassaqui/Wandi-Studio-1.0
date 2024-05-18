@@ -172,11 +172,15 @@ void loop() {
   if (sinal_button == LOW && sinal_button1 == HIGH) {
     Serial.println("botao01Pressionado");
     digitalWrite(led, HIGH);
+    delay(5);
+    digitalWrite(led, LOW);
   }
+  
   else if (sinal_button1 == LOW && sinal_button == HIGH) {
     Serial.println("botao02Pressionado");
     digitalWrite(led, HIGH);
-
+    delay(5);
+    digitalWrite(led, LOW);
   }
   /* ca esta o conflito com meus metodos piscar led poh
   else {

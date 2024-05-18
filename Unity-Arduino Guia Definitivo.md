@@ -1,87 +1,237 @@
-# Essa é a minha configuração da comunicação do software com arduino
+# 🌟 Unity-Arduino Guia Definitivo 🌟
 
-## Primeiro configure a Unity pra comunicação IO.Portas
+Bem-vindo ao **Unity-Arduino Guia Definitivo**! Este repositório oferece um guia completo para configurar e estabelecer comunicação entre o Arduino e a Unity. 🌐🚀
 
-1 - Adicione a biblioteca na sua classe: ***using System.IO.Ports;***
+## 📋 Índice
 
-2 - Entre Build Settings e troque ***.NET Standard pelo .NET Framework***
+- [Introdução](#introdução)
+- [Pré-requisitos](#pré-requisitos)
+- [Configuração do Arduino](#configuração-do-arduino)
+- [Configuração da Unity](#configuração-da-unity)
+- [Testando a Comunicação](#testando-a-comunicação)
+- [Contribuições](#contribuições)
+- [Licença](#licença)
 
-Está aqui o script da unity:
+## 🌟 Introdução
 
-```csharp
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using System.IO.Ports;
+Este guia fornece instruções passo a passo para configurar a comunicação entre Arduino e Unity, permitindo que você crie projetos interativos incríveis. Com este guia, você aprenderá a:
 
-public class ArduinoController : MonoBehaviour
-{
-    SerialPort serialPort = new SerialPort("COM3", 9600); // Substitua "COM3" pela porta correta do seu Arduino
+- Configurar o Arduino para enviar e receber comandos.
+- Configurar a Unity para se comunicar com o Arduino.
+- Integrar ambos para criar interações dinâmicas.
 
-    void Start()
-    {
-        serialPort.Open();
-        serialPort.ReadTimeout = 100;
+## 🛠️ Pré-requisitos
+
+Antes de começar, você precisará dos seguintes itens:
+
+- [Arduino IDE](https://www.arduino.cc/en/software)
+- [Unity](https://unity.com/)
+- Na Unity entra em ***Project Settings/Player/Other Settings e altere o .NET STandard pelo .NET Framework***
+- Placa Arduino (por exemplo, Arduino Uno)
+- Cabo USB para Arduino
+
+## ⚙️ Configuração do Arduino
+
+1. **Escreva o código Arduino:**
+
+    ```c
+    int led = 13;
+    int x = 0;
+
+    int button = 3;
+    int sinal_button = 0;
+
+    int button1 = 8;
+    int sinal_button1 = 0;
+
+    char comando;
+
+    void setup() {
+      Serial.begin(9600);
+      pinMode(led, OUTPUT);
+      pinMode(button, INPUT_PULLUP);
+      pinMode(button1, INPUT_PULLUP);
     }
 
-    void Update()
+    void loop() {
+      sinal_button = digitalRead(button);
+      sinal_button1 = digitalRead(button1);
+
+      if (sinal_button == LOW && sinal_button1 == HIGH) {
+        Serial.println("botao01Pressionado");
+        digitalWrite(led, HIGH);
+      }
+      else if (sinal_button1 == LOW && sinal_button == HIGH) {
+        Serial.println("botao02Pressionado");
+        digitalWrite(led, HIGH);
+      }
+
+      if (Serial.available() > 0) {
+        comando = Serial.read();
+        switch (comando) {
+          case 'A':
+            piscarLedA();
+            break;
+          case 'B':
+            piscarLedB();
+            break;
+          case 'C':
+          case 'D':
+          case 'E':
+          case 'F':
+          case 'G':
+          case 'H':
+          case 'I':
+          case 'J':
+          case 'K':
+          case 'L':
+            piscarLedCtoL();
+            break;
+        }
+      }
+    }
+
+    void piscarLedA() {
+      digitalWrite(led, HIGH);
+      delay(10);
+      digitalWrite(led, LOW);
+      delay(3);
+    }
+
+    void piscarLedB() {
+      digitalWrite(led, HIGH);
+      delay(16);
+      digitalWrite(led, LOW);
+      delay(8);
+    }
+
+    void piscarLedCtoL() {
+      digitalWrite(led, HIGH);
+      delay(8);
+      digitalWrite(led, LOW);
+      delay(16);
+    }
+    ```
+
+2. **Carregue o código na sua placa Arduino:**
+   - Conecte sua placa ao computador e use o Arduino IDE para carregar o código.
+
+## 🎮 Configuração da Unity
+
+1. **Criar um novo projeto no Unity:**
+   - Abra o Unity e crie um novo projeto.
+
+2. **Adicionar o Script de Comunicação Serial:**
+
+    ```csharp
+    using System.Collections;
+    using System.Collections.Generic;
+    using UnityEngine;
+    using System.IO.Ports;
+
+    public class ArduinoController : MonoBehaviour
     {
-        if (serialPort.IsOpen)
+        SerialPort serialPort = new SerialPort("COM3", 9600);
+
+        void Start()
         {
-            try
+            serialPort.Open();
+            serialPort.ReadTimeout = 100;
+        }
+
+        void Update()
+        {
+            if (serialPort.IsOpen)
             {
-                string message = serialPort.ReadLine();
-                Debug.Log("Recebido: " + message);
-                receberDados(message);
+                try
+                {
+                    string message = serialPort.ReadLine();
+                    Debug.Log("Recebido: " + message);
+                    ProcessArduinoMessage(message);
+                }
+                catch (System.Exception)
+                {
+                    // Ignora timeouts
+                }
+
+                if (Input.GetKeyDown(KeyCode.A))
+                {
+                    SendCommandToArduino('A');
+                }
+                else if (Input.GetKeyDown(KeyCode.B))
+                {
+                    SendCommandToArduino('B');
+                }
+                // Adicione mais comandos conforme necessário
             }
-            catch (System.Exception)
+        }
+
+        // Receber carta de amor do Arduino.
+        void ProcessArduinoMessage(string message)
+        {
+            if (message == "botao01Pressionado")
             {
-                // Ignora timeouts
+                Debug.Log("Botão 01 Pressionado");
+            }
+            else if (message == "botao02Pressionado")
+            {
+                Debug.Log("Botão 02 Pressionado");
+            }
+            else if (message == "botoesNaoPressionados")
+            {
+                Debug.Log("Nenhum botão pressionado");
+            }
+        }
+
+
+        // Enviar carta de amor para arduino.
+        public void SendCommandToArduino(char command)
+        {
+            if (serialPort.IsOpen)
+            {
+                serialPort.Write(command.ToString());
+                Debug.Log("Enviado: " + command);
+            }
+        }
+
+        // Fechar a porta quando encerrar o app.
+        void OnApplicationQuit()
+        {
+            if (serialPort.IsOpen)
+            {
+                serialPort.Close();
             }
         }
     }
+    ```
 
-    void receberDados(string message)
-    {
-        // Aqui você pode processar mensagens recebidas do Arduino e tomar ações na Unity
-        if (message == "botao01Pressionado")
-        {
-            Debug.Log("Botão 01 Pressionado");
-            // Ações quando o botão 01 é pressionado
-        }
-        else if (message == "botao02Pressionado")
-        {
-            Debug.Log("Botão 02 Pressionado");
-            // Ações quando o botão 02 é pressionado
-        }
-        else if (message == "botoesNaoPressionados")
-        {
-            Debug.Log("Nenhum botão pressionado");
-            // Ações quando nenhum botão é pressionado
-        }
-    }
+3. **Configurar a Porta Serial:**
+   - Certifique-se de que a porta serial no script Unity (`"COM3"`) corresponda à porta do seu Arduino.
 
-    public void SendCommandToArduino(char command)
-    {
-        if (serialPort.IsOpen)
-        {
-            serialPort.Write(command.ToString());
-            Debug.Log("Enviado: " + command);
-        }
-    }
+4. **Adicionar Componentes no Unity:**
+   - Adicione `ArduinoController` a um `Empty GameObject`.
 
-    void OnApplicationQuit()
-    {
-        if (serialPort.IsOpen)
-        {
-            serialPort.Close();
-        }
-    }
-}
+## ✅ Testando a Comunicação
 
-```
+1. **Rodar o Projeto Unity:**
+   - Execute o projeto e pressione as teclas configuradas para enviar comandos ao Arduino.
 
-## Agora configure a sua placa arduino juntamente com protoboard (Componentes físicos)
+2. **Verificar o Monitor Serial do Arduino:**
+   - Verifique se os comandos são recebidos corretamente e que o LED está piscando conforme esperado.
+
+## 🤝 Contribuições
+
+Contribuições são bem-vindas! Sinta-se à vontade para abrir issues e enviar pull requests.
+
+## 📜 Licença
+
+Este projeto está licenciado sob a Licença MIT. Veja o arquivo [LICENSE](LICENSE) para mais detalhes.
+
+---
+
+Feito com ❤️ por [Elísio Massaqui]
+
+## (Opcional) Configure a sua placa arduino juntamente com protoboard pra piscar LED aos receber dados de Unity (Componentes físicos)
 
 1 - Prepare apenas uma LED.
 
@@ -95,111 +245,3 @@ public class ArduinoController : MonoBehaviour
 - Botão 2 = Pin 8 (GND)
 
 Não esquça que ***TR e RX*** na placa serve pra monitorar a entrada e saída de dados.
-
-## Conecte o arduino com via cabo ao computador
-
-Está aqui o script da configuração da placa arduino:
-
-```c
-int led = 13;
-int x = 0;
-
-int button = 3;
-int sinal_button = 0;
-
-int button1 = 8;
-int sinal_button1 = 0;
-
-char comando;
-
-
-void setup() {
-  // put your setup code here, to run once:
-  Serial.begin(9600); // Inicia a comunicação serial
-
-  pinMode(led, OUTPUT);
-  pinMode(button, INPUT_PULLUP);
-
-  pinMode(button1, INPUT_PULLUP);
-
-}
-
-void loop() {
-
-  sinal_button = digitalRead(button);
-  sinal_button1 = digitalRead(button1);
-
-  if (sinal_button == LOW && sinal_button1 == HIGH) {
-    Serial.println("botao01Pressionado");
-    digitalWrite(led, HIGH);
-    delay(5);
-    digitalWrite(led, LOW);
-  }
-
-  else if (sinal_button1 == LOW && sinal_button == HIGH) {
-    Serial.println("botao02Pressionado");
-    digitalWrite(led, HIGH);
-    delay(5);
-    digitalWrite(led, LOW);
-  }
-  /* ca esta o conflito com meus metodos piscar led poh
-  else {
-    digitalWrite(led, LOW);
-    //Muito importante pra não enviar as strings anteriores continuamente, e o programa poder rodar independentemente, oque evita o programa não colar no inicio a espera do input pra receber a string que quer nesse caso distraimo ele com outra garota, pra não pensar muito kkkk
-    Serial.println("botoesNaoPressionados");
-  }
-  */
-  
-  // put your main code here, to run repeatedly:
-    if (Serial.available() > 0) {
-    comando = Serial.read();  // Lê o comando da porta serial
-    
-    // Verifica o comando recebido e executa a ação correspondente
-    switch (comando) {
-      case 'A':
-      piscarLedA();
-      break;
-      case 'B':
-      piscarLedB();
-      break;
-      case 'C':
-      case 'D':
-      case 'E':
-      case 'F':
-      case 'G':
-      case 'H':
-      case 'I':
-      case 'J':
-      case 'K':
-      case 'L': 
-      piscarLedCtoL();
-      break;
-    }
-  }
-}
-  
-  void piscarLedA() {
-  digitalWrite(led, HIGH);  // Liga o LED
-  delay(10);
-  digitalWrite(led, LOW);   // Desliga o LED
-  delay(3);
-}
-
-void piscarLedB() {
-  digitalWrite(led, HIGH);  // Liga o LED
-  delay(16);
-  digitalWrite(led, LOW);   // Desliga o LED
-  delay(8);
-}
-
-
-void piscarLedCtoL() {
-  digitalWrite(led, HIGH);  // Liga o LED
-  delay(8);
-  digitalWrite(led, LOW);   // Desliga o LED
-  delay(16);
-}
-
-```
-
-Sinta-se a vontade pra contribuir...

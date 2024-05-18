@@ -12,111 +12,71 @@ Está aqui o script da unity:
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
-using UnityEngine.EventSystems;
-using TMPro;
 using System.IO.Ports;
 
-public class unityArduino : MonoBehaviour
+public class ArduinoController : MonoBehaviour
 {
-
-    serialPort = new SerialPort("Nome da Porta", 9600);
-
-    void Awake()
-    {
-
-    }
+    SerialPort serialPort = new SerialPort("COM3", 9600); // Substitua "COM3" pela porta correta do seu Arduino
 
     void Start()
     {
-        //Abra a porta ao inicializar
-        OpenPort();
-
+        serialPort.Open();
+        serialPort.ReadTimeout = 100;
     }
 
     void Update()
     {
-        //Pressione a Letra P pra fechar a porta
-        ClosePort();
-
-        //Carta de amor pra arduino.
-        enviarDados();
-
-        //Carta de amor de arduino.s
-        receberDados();
-
-    }
-
-    //Abrir porta!
-     public void OpenPort()
-    {
-        // Tentar abrir a porta
-        try
+        if (serialPort.IsOpen)
         {
-            serialPort.Open();
-            Debug.Log("Porta aberta!");
-        }
-        //Se não conseguir abrir
-        catch (System.Exception e)
-        {
-            Debug.LogError("Erro ao abrir a porta: " + e.Message);
-        }
-    }
-
-    //Fechar porta
-     public void ClosePort()
-    {
-        if(Input.GetKey(KeyCode.P))
-        {
-            // Fechar a porta se estiver aberta
-            if (serialPort.IsOpen)
+            try
             {
-                serialPort.Close();
-                Debug.Log("Porta fechada");
+                string message = serialPort.ReadLine();
+                Debug.Log("Recebido: " + message);
+                receberDados(message);
+            }
+            catch (System.Exception)
+            {
+                // Ignora timeouts
             }
         }
     }
 
-    //Carta de amor pra Arduino.
-    void enviarDados()
+    void receberDados(string message)
     {
-        //Enviando characteres pra arduino de modo acender a LED
-        if(Input.GetKey(KeyCode.A) && serialPort.IsOpen)()
+        // Aqui você pode processar mensagens recebidas do Arduino e tomar ações na Unity
+        if (message == "botao01Pressionado")
         {
-            serialPort.Write("A");
-            Debug.Log("Enviando A pra LED");
+            Debug.Log("Botão 01 Pressionado");
+            // Ações quando o botão 01 é pressionado
         }
-        else if(Input.GetKey(KeyCode.B) && serialPort.IsOpen)()
+        else if (message == "botao02Pressionado")
         {
-            serialPort.Write("B");
-            Debug.Log("Enviando B pra LED");
+            Debug.Log("Botão 02 Pressionado");
+            // Ações quando o botão 02 é pressionado
         }
-        else if(Input.GetKey(KeyCode.L) && serialPort.IsOpen)()
+        else if (message == "botoesNaoPressionados")
         {
-            serialPort.Write("L");
-            Debug.Log("Enviando L pra LED");
-        }
-
-        //Pode se adicionar de A até L conforme nos casos no código do arduino, esteja a vontade pra personalizar do seu jeito.
-    }
-
-
-    //Carta de amor de Arduino.
-    void receberDados()
-    {
-        if(serialPort.IsOpen)
-        {
-            if(serialPort.ReadLine("botao01Pressionado"))
-            {
-                Debu.Log("Recebendo dados, Botão 01");
-            }
-            else if(serialPort.ReadLine("botao02Pressionado"))
-            {
-                Debu.Log("Recebendo dados, Botão 02");
-            }
+            Debug.Log("Nenhum botão pressionado");
+            // Ações quando nenhum botão é pressionado
         }
     }
 
+    public void SendCommandToArduino(char command)
+    {
+        if (serialPort.IsOpen)
+        {
+            serialPort.Write(command.ToString());
+            Debug.Log("Enviado: " + command);
+        }
+    }
+
+    void OnApplicationQuit()
+    {
+        if (serialPort.IsOpen)
+        {
+            serialPort.Close();
+        }
+    }
 }
 
 ```
@@ -175,7 +135,7 @@ void loop() {
     delay(5);
     digitalWrite(led, LOW);
   }
-  
+
   else if (sinal_button1 == LOW && sinal_button == HIGH) {
     Serial.println("botao02Pressionado");
     digitalWrite(led, HIGH);

@@ -12,6 +12,11 @@ public class wandiController : MonoBehaviour
     public bool rotacionar;
     public bool home;
 
+    public bool receber;
+
+    [Header("In Arduino")]
+    public string message;
+
     [Header("Juntas Steps/s")]
     public Transform origemJ1; //Pegar o vector escalar do objecto.
     public float destinoJ1; //Inicializar o vector imaginário do objecto.
@@ -263,6 +268,29 @@ public class wandiController : MonoBehaviour
         destinoJ3 = Mathf.Clamp(destinoJ3, -80f, -60f);  //Suposto valor inicial: -77
         destinoJ4 = Mathf.Clamp(destinoJ4,-64f, -46f);   //Suposto valor inicial: -54
         destinoJ5 = Mathf.Clamp(destinoJ5, -87f, 90f);   //Suposto valor inicial: 2
+
+        //Receber carta de amor de arduino.
+        if (serialPort.IsOpen)
+        {
+            message = serialPort.ReadLine();
+            Debug.Log("Recebido: " + message);
+
+            if (message.Contains("otao01Pressionado"))
+            {
+                destinoJ1 += 5f;
+                Debug.Log("Botão 01 Pressionado");
+            }
+            else if (message.Contains("botao02Pressionado"))
+            {
+                destinoJ1 -= 5f;
+                Debug.Log("Botão 02 Pressionado");
+            }
+            else
+            {
+                message = "Love";
+            }
+
+        }
           
     }
 

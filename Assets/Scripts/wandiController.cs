@@ -45,14 +45,6 @@ public class wandiController : MonoBehaviour
     public Vector3 basePosition = new Vector3(0.21f, 0.1021f, 67f);
     public float vectores;
 
-    [Header("Steps & Graus")]
-    public int stepsJ1;
-    public int stepsJ2;
-    public int grausJ3;
-    public int grausJ4;
-    public int grausJ5;
-    public int grausJ6;
-
 
     public SerialPort serialPort;
     /*
@@ -245,12 +237,12 @@ public class wandiController : MonoBehaviour
           {
              
              //Juntas Steps/s
-            origemJ1.localRotation = Quaternion.Slerp(origemJ1.localRotation, Quaternion.Euler(0, stepsJ1, 0), velocidadeJ1);
-            origemJ2.localRotation = Quaternion.Slerp(origemJ2.localRotation, Quaternion.Euler(0, 0, stepsJ2), velocidadeJ2);
+            origemJ1.localRotation = Quaternion.Slerp(origemJ1.localRotation, Quaternion.Euler(0, destinoJ1, 0), velocidadeJ1);
+            origemJ2.localRotation = Quaternion.Slerp(origemJ2.localRotation, Quaternion.Euler(0, 0, destinoJ2), velocidadeJ2);
             //Juntas Graus/s
-            origemJ3.localRotation = Quaternion.Slerp(origemJ3.localRotation, Quaternion.Euler(0, 0, grausJ3), velocidadeJ3);
-            origemJ4.localRotation = Quaternion.Slerp(origemJ4.localRotation, Quaternion.Euler(0, 0, grausJ4), velocidadeJ4);
-            origemJ5.localRotation = Quaternion.Slerp(origemJ5.localRotation, Quaternion.Euler(0, grausJ5, 0), velocidadeJ5);
+            origemJ3.localRotation = Quaternion.Slerp(origemJ3.localRotation, Quaternion.Euler(0, 0, destinoJ3), velocidadeJ3);
+            origemJ4.localRotation = Quaternion.Slerp(origemJ4.localRotation, Quaternion.Euler(0, 0, destinoJ4), velocidadeJ4);
+            origemJ5.localRotation = Quaternion.Slerp(origemJ5.localRotation, Quaternion.Euler(0, destinoJ5, 0), velocidadeJ5);
             //falta J6, mas é básico.
 
             //Para base na esteira
@@ -266,12 +258,12 @@ public class wandiController : MonoBehaviour
           }
 
         //Steps e Graus.
-        stepsJ1 = Mathf.Clamp(stepsJ1, -83, 82);   //Suposto valor inicial: 2
-        stepsJ2 = Mathf.Clamp(stepsJ2, -50, 10);   //Suposto valor inicial: 10
+        destinoJ1 = Mathf.Clamp(destinoJ1, -83, 82);   //Suposto valor inicial: 2
+        destinoJ2 = Mathf.Clamp(destinoJ2, -50, 10);   //Suposto valor inicial: 10
 
-        grausJ3 = Mathf.Clamp(grausJ3, -80, -60);  //Suposto valor inicial: -77
-        grausJ4 = Mathf.Clamp(grausJ4,-64, -46);   //Suposto valor inicial: -54
-        grausJ5 = Mathf.Clamp(grausJ3, -87, 90);   //Suposto valor inicial: 2
+        destinoJ3 = Mathf.Clamp(destinoJ3, -80, -60);  //Suposto valor inicial: -77
+        destinoJ4 = Mathf.Clamp(destinoJ4,-64, -46);   //Suposto valor inicial: -54
+        destinoJ5 = Mathf.Clamp(destinoJ5, -87, 90);   //Suposto valor inicial: 2
           
     }
 

@@ -86,7 +86,7 @@ public class wandiController : MonoBehaviour
     public TextMeshProUGUI SincronizadaJ5UI;
 
     [Header("Valor Unitário das Juntas Na UI")]
-    public TextMeshProUGUI unitJ1;  //Mostrar, o valor a ser ++ ou -- dos botoes
+    public TextMeshProUGUI unitJ1;  //Mostrar, o valor a ser ++ ou -- dos botoes.
     public TextMeshProUGUI unitJ2;
     public TextMeshProUGUI unitJ3;
     public TextMeshProUGUI unitJ4;
@@ -269,25 +269,20 @@ public class wandiController : MonoBehaviour
         destinoJ4 = Mathf.Clamp(destinoJ4,-64f, -46f);   //Suposto valor inicial: -54
         destinoJ5 = Mathf.Clamp(destinoJ5, -87f, 90f);   //Suposto valor inicial: 2
 
-        //Receber carta de amor de arduino
+        //Receber carta de amor de arduino.
         if (serialPort.IsOpen)
         {
             message = serialPort.ReadLine();
-            Debug.Log("Recebido: " + message);
 
             if (message.Contains("otao01Pressionado"))
             {
-                destinoJ1 += 5f;
+                destinoJ1 ++;
                 Debug.Log("Botão 01 Pressionado");
             }
             else if (message.Contains("botao02Pressionado"))
             {
-                destinoJ1 -= 5f;
+                destinoJ1 --;
                 Debug.Log("Botão 02 Pressionado");
-            }
-            else
-            {
-                message = "!!esperando%Arduino.";
             }
 
         }

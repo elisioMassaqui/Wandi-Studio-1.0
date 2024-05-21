@@ -258,12 +258,12 @@ public class wandiController : MonoBehaviour
           }
 
         //Steps e Graus.
-        destinoJ1 = Mathf.Clamp(destinoJ1, -83, 82);   //Suposto valor inicial: 2
-        destinoJ2 = Mathf.Clamp(destinoJ2, -50, 10);   //Suposto valor inicial: 10
+        destinoJ1 = Mathf.Clamp(destinoJ1, -83f, 82f);   //Suposto valor inicial: 2
+        destinoJ2 = Mathf.Clamp(destinoJ2, -50f, 10f);   //Suposto valor inicial: 10
 
-        destinoJ3 = Mathf.Clamp(destinoJ3, -80, -60);  //Suposto valor inicial: -77
-        destinoJ4 = Mathf.Clamp(destinoJ4,-64, -46);   //Suposto valor inicial: -54
-        destinoJ5 = Mathf.Clamp(destinoJ5, -87, 90);   //Suposto valor inicial: 2
+        destinoJ3 = Mathf.Clamp(destinoJ3, -80f, -60f);  //Suposto valor inicial: -77
+        destinoJ4 = Mathf.Clamp(destinoJ4,-64f, -46f);   //Suposto valor inicial: -54
+        destinoJ5 = Mathf.Clamp(destinoJ5, -87f, 90f);   //Suposto valor inicial: 2
           
     }
 

@@ -25,7 +25,6 @@ public class wandiController : MonoBehaviour
     public Transform origemJ3;
     public float destinoJ3;
     public float velocidadeJ3;
-
     public Transform origemJ4;
     public float destinoJ4;
     public float velocidadeJ4;

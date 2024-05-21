@@ -35,12 +35,15 @@ void loop() {
     digitalWrite(led, HIGH);
 
   }
-  else
+  
+  //Beleza, conseguimos fazer com que pare de enviar sinal e apagar a LED, sem causar outros problemas.
+  else if(sinal_button1 == HIGH && sinal_button == HIGH)
   {
     Serial.println("Nada Pressionado");
+    digitalWrite(led, LOW);
   }
   
-  /* ca esta o conflito com meus metodos piscar led poh (Conflito de concorrencia que fazia o software travar ao se comunicar com Wandi Robot)
+  /* ca esta o conflito com meus metodos piscar led poh
   else {
     digitalWrite(led, LOW);
     //Muito importante pra não enviar as strings anteriores continuamente, e o programa poder rodar independentemente, oque evita o programa não colar no inicio a espera do input pra receber a string que quer nesse caso distraimo ele com outra garota, pra não pensar muito kkkk

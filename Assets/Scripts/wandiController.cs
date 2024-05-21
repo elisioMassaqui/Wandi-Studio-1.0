@@ -45,8 +45,8 @@ public class wandiController : MonoBehaviour
     public float vectores;
 
     [Header("Steps & Graus")]
-    public float steps;
-    public float graus;
+    public int steps;
+    public int graus;
 
 
     public SerialPort serialPort;

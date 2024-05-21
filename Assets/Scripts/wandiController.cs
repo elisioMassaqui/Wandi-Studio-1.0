@@ -287,7 +287,7 @@ public class wandiController : MonoBehaviour
             }
             else
             {
-                message = "Love";
+                message = "!!esperando%Arduino.";
             }
 
         }

@@ -44,6 +44,10 @@ public class wandiController : MonoBehaviour
     public Vector3 basePosition = new Vector3(0.21f, 0.1021f, 67f);
     public float vectores;
 
+    [Header("Steps & Graus")]
+    public float steps;
+    public float graus;
+
 
     public SerialPort serialPort;
     /*

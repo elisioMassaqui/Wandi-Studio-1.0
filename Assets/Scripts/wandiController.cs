@@ -5,6 +5,7 @@ using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using TMPro;
 using System.IO.Ports;
+using System;
 
 public class wandiController : MonoBehaviour
 {
@@ -45,8 +46,12 @@ public class wandiController : MonoBehaviour
     public float vectores;
 
     [Header("Steps & Graus")]
-    public int steps;
-    public int graus;
+    public int stepsJ1;
+    public int stepsJ2;
+    public int grausJ3;
+    public int grausJ4;
+    public int grausJ5;
+    public int grausJ6;
 
 
     public SerialPort serialPort;
@@ -259,6 +264,14 @@ public class wandiController : MonoBehaviour
             SincronizadaJ4UI.text = "Posição J4.Y: " + origemJ4.localRotation.ToString("F1");
             SincronizadaJ5UI.text = "Posição3 J5.Y: " + origemJ5.localRotation.ToString("F1");
           }
+
+        //Steps e Graus.
+        stepsJ1 = Mathf.Clamp(stepsJ1, -83, 82);   //Suposto valor inicial: 2
+        stepsJ2 = Mathf.Clamp(stepsJ2, -50, 10);   //Suposto valor inicial: 10
+
+        grausJ3 = Mathf.Clamp(grausJ3, -80, -60);  //Suposto valor inicial: -77
+        grausJ4 = Mathf.Clamp(grausJ4,-64, -46);   //Suposto valor inicial: -54
+        grausJ5 = Mathf.Clamp(grausJ3, -87, 90);   //Suposto valor inicial: 2
           
     }
 

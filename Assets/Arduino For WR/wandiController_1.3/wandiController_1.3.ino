@@ -31,12 +31,14 @@ void loop() {
     digitalWrite(led, HIGH);
     delay(3);
     digitalWrite(led, LOW);
+    Serial.println("Nothing01");
   }
   else if (sinal_button1 == LOW && sinal_button == HIGH) {
     Serial.println("botao02Pressionado");
     digitalWrite(led, HIGH);
     delay(3);
     digitalWrite(led, LOW);
+    Serial.println("Nothing02");
 
   }
   

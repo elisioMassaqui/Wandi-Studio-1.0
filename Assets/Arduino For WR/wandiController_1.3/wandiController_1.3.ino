@@ -29,18 +29,15 @@ void loop() {
   if (sinal_button == LOW && sinal_button1 == HIGH) {
     Serial.println("botao01Pressionado");
     digitalWrite(led, HIGH);
+    delay(3);
+    digitalWrite(led, LOW);
   }
   else if (sinal_button1 == LOW && sinal_button == HIGH) {
     Serial.println("botao02Pressionado");
     digitalWrite(led, HIGH);
-
-  }
-  
-  //Beleza, conseguimos fazer com que pare de enviar sinal e apagar a LED, sem causar outros problemas.
-  else if(sinal_button1 == HIGH && sinal_button == HIGH)
-  {
-    Serial.println("Nada Pressionado");
+    delay(3);
     digitalWrite(led, LOW);
+
   }
   
   /* ca esta o conflito com meus metodos piscar led poh

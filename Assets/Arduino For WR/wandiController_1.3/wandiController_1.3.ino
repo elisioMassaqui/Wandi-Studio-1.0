@@ -9,6 +9,12 @@ int sinal_button1 = 0;
 
 char comando;
 
+char love;
+
+char printLove;
+
+int contador;
+
 
 void setup() {
   // put your setup code here, to run once:
@@ -40,6 +46,23 @@ void loop() {
     digitalWrite(led, LOW);
     Serial.println("Nothing02");
 
+  }
+
+  love = Serial.read();
+
+  if (love == 'A') {
+    contador =  contador + 1;
+
+    Serial.println(contador);
+
+    delay(200);
+  }
+  else if (love == 'B') {
+  contador =  contador - 1;
+
+    Serial.println(contador);
+
+    delay(200);
   }
   
   /* ca esta o conflito com meus metodos piscar led poh

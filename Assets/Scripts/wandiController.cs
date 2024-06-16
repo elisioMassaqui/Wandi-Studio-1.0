@@ -274,12 +274,24 @@ public class wandiController : MonoBehaviour
         {
             message = serialPort.ReadLine();
 
-            if (message.Contains("otao01Pressionado"))
+            if (message.Contains("botao01Pressionado"))
             {
                 destinoJ1 ++;
                 Debug.Log("Botão 01 Pressionado");
             }
             else if (message.Contains("botao02Pressionado"))
+            {
+                destinoJ1 --;
+                Debug.Log("Botão 02 Pressionado");
+            }
+
+            
+            if (message.Contains("A"))
+            {
+                destinoJ1 ++;
+                Debug.Log("Botão 01 Pressionado");
+            }
+            else if (message.Contains("B"))
             {
                 destinoJ1 --;
                 Debug.Log("Botão 02 Pressionado");

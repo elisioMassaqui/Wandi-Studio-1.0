@@ -6,9 +6,6 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/wandiHome Cross Plataform.unity
-    guid: c89c00d2c14bcee4c95ac10800429c79
-  - enabled: 1
     path: Assets/Scenes/Wandi Studio Scene.unity
     guid: 52660e24cb63d36409e344e2104e1ddc
   m_configObjects: {}

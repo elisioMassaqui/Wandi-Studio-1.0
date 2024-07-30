@@ -268,36 +268,6 @@ public class wandiController : MonoBehaviour
         destinoJ3 = Mathf.Clamp(destinoJ3, -80f, -60f);  //Suposto valor inicial: -77
         destinoJ4 = Mathf.Clamp(destinoJ4,-64f, -46f);   //Suposto valor inicial: -54
         destinoJ5 = Mathf.Clamp(destinoJ5, -87f, 90f);   //Suposto valor inicial: 2
-
-        //Receber carta de amor de arduino.
-        if (serialPort.IsOpen)
-        {
-            message = serialPort.ReadLine();
-
-            if (message.Contains("botao01Pressionado"))
-            {
-                destinoJ1 ++;
-                Debug.Log("Botão 01 Pressionado");
-            }
-            else if (message.Contains("botao02Pressionado"))
-            {
-                destinoJ1 --;
-                Debug.Log("Botão 02 Pressionado");
-            }
-
-            
-            if (message.Contains("A"))
-            {
-                destinoJ1 ++;
-                Debug.Log("Botão 01 Pressionado");
-            }
-            else if (message.Contains("B"))
-            {
-                destinoJ1 --;
-                Debug.Log("Botão 02 Pressionado");
-            }
-
-        }
           
     }
 

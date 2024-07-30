@@ -40,9 +40,9 @@ PlayerSettings:
     width: 1
     height: 1
   m_SplashScreenLogos:
-  - logo: {fileID: 21300000, guid: 6e25d8e49d2ae9649b14cc154e2feb21, type: 3}
-    duration: 10
-  m_VirtualRealitySplashScreen: {fileID: 0}
+  - logo: {fileID: 21300000, guid: 0fc08da6fc96154469243707703b844e, type: 3}
+    duration: 5
+  m_VirtualRealitySplashScreen: {fileID: 2800000, guid: 0fc08da6fc96154469243707703b844e, type: 3}
   m_HolographicTrackingLossScreen: {fileID: 0}
   defaultScreenWidth: 1920
   defaultScreenHeight: 1080
@@ -286,7 +286,7 @@ PlayerSettings:
   - m_BuildTarget: Standalone
     m_Icons:
     - serializedVersion: 2
-      m_Icon: {fileID: 2800000, guid: ac9542c9843cb4341af854a0d637efee, type: 3}
+      m_Icon: {fileID: 2800000, guid: 69a3f4f0d0210234cbdce991ecfb48c0, type: 3}
       m_Width: 1024
       m_Height: 1024
       m_Kind: 0
@@ -324,6 +324,13 @@ PlayerSettings:
       m_Icon: {fileID: 0}
       m_Width: 16
       m_Height: 16
+      m_Kind: 0
+  - m_BuildTarget: 
+    m_Icons:
+    - serializedVersion: 2
+      m_Icon: {fileID: 2800000, guid: 69a3f4f0d0210234cbdce991ecfb48c0, type: 3}
+      m_Width: 128
+      m_Height: 128
       m_Kind: 0
   m_BuildTargetPlatformIcons:
   - m_BuildTarget: Android

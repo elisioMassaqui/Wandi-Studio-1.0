@@ -42,7 +42,7 @@ public class wandiController : MonoBehaviour
     public float destinoJ6;
     public float velocidadeJ6;
 
-    [Header("Base Na Esteira")]
+    [Header("HOME")]
     public Transform baseEsteiraOrigem;
     public float baseDestino;
     public float baseVelocidade;
@@ -262,7 +262,7 @@ public class wandiController : MonoBehaviour
           }
 
         //Steps e Graus.
-        destinoJ1 = Mathf.Clamp(destinoJ1, -83f, 82f);   //Suposto valor inicial: 2
+        destinoJ1 = Mathf.Clamp(destinoJ1, -180f, 180f);   //Suposto valor inicial: 2
         destinoJ2 = Mathf.Clamp(destinoJ2, -50f, 10f);   //Suposto valor inicial: 10
 
         destinoJ3 = Mathf.Clamp(destinoJ3, -80f, -60f);  //Suposto valor inicial: -77

@@ -10,11 +10,11 @@ GameObject:
   m_Component:
   - component: {fileID: 2043358821151809335}
   - component: {fileID: 5450294293535240665}
-  - component: {fileID: 3485069766523438823}
+  - component: {fileID: 7227262929845499878}
   m_Layer: 0
   m_Name: Wandi Studio
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: 3936346786652291628, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -46,7 +46,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   nameObject: {fileID: 0}
---- !u!114 &3485069766523438823
+--- !u!114 &7227262929845499878
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -60,4 +60,3 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   useTrail: {fileID: 0}
   toggleTrail: {fileID: 0}
-  changingTrailColor: {fileID: 0}
